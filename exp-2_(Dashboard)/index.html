@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="dashboard">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <h2 class="logo">⚡ Admin</h2>
+      <nav>
+        <a href="#" class="nav-link active" data-page="home">🏠 Dashboard</a>
+        <a href="#" class="nav-link" data-page="analytics">📊 Analytics</a>
+        <a href="#" class="nav-link" data-page="users">👥 Users</a>
+        <a href="#" class="nav-link" data-page="settings">⚙ Settings</a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main">
+      <header class="navbar">
+        <h1 id="page-title">Dashboard Overview</h1>
+        <button id="theme-toggle">🌙</button>
+      </header>
+
+      <section class="cards">
+        <!-- Sales Chart Card -->
+        <div class="card" data-card="sales">
+          <div class="stats-card">
+            <h3>📈 Total Sales</h3>
+            <div class="number" id="sales-number">$47,825</div>
+            <div class="trend up">+12.5% from last month</div>
+          </div>
+        </div>
+
+        <!-- User Analytics Card -->
+        <div class="card" data-card="analytics">
+          <div class="stats-card">
+            <h3>📊 Page Views</h3>
+            <div class="number" id="views-number">2,847</div>
+            <div class="trend up">+8.3% from last week</div>
+          </div>
+        </div>
+
+        <!-- Active Users Card -->
+        <div class="card" data-card="users">
+          <div class="stats-card">
+            <h3>👥 Active Users</h3>
+            <div class="number" id="users-number">1,234</div>
+            <div class="trend down">-2.1% from yesterday</div>
+          </div>
+        </div>
+
+        <!-- Quick Actions Card -->
+        <div class="card" data-card="actions">
+          <div>
+            <h3>⚡ Quick Actions</h3>
+            <div class="action-buttons">
+              <button class="action-btn" onclick="performAction('export')">📥 Export</button>
+              <button class="action-btn" onclick="performAction('backup')">💾 Backup</button>
+              <button class="action-btn" onclick="performAction('refresh')">🔄 Refresh</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
