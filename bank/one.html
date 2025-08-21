@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard</title>
+  <style>
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #222222;
+      --header-bg: #f1f1f1;
+      --sidebar-bg: #e4e4e4;
+      --footer-bg: #f1f1f1;
+    }
+
+    [data-theme="dark"] {
+      --bg-color: #1e1e1e;
+      --text-color: #ffffff;
+      --header-bg: #2c2c2c;
+      --sidebar-bg: #333333;
+      --footer-bg: #2c2c2c;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      display: grid;
+      grid-template-areas:
+        "header header"
+        "sidebar main"
+        "footer footer";
+      grid-template-columns: 250px 1fr;
+      grid-template-rows: 60px 1fr 40px;
+      height: 100vh;
+    }
+
+    header {
+      grid-area: header;
+      background-color: var(--header-bg);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+    }
+
+    aside {
+      grid-area: sidebar;
+      background-color: var(--sidebar-bg);
+      padding: 20px;
+    }
+
+    main {
+      grid-area: main;
+      padding: 20px;
+    }
+
+    footer {
+      grid-area: footer;
+      background-color: var(--footer-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .theme-toggle {
+      cursor: pointer;
+      padding: 8px 12px;
+      background: none;
+      border: 1px solid var(--text-color);
+      border-radius: 4px;
+      color: var(--text-color);
+    }
+
+    nav a {
+      display: block;
+      margin: 10px 0;
+      color: var(--text-color);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Admin Dashboard</h1>
+    <button class="theme-toggle" onclick="toggleTheme()">Switch Theme</button>
+  </header>
+  <aside>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Users</a>
+      <a href="#">Settings</a>
+    </nav>
+  </aside>
+  <main>
+    <h2>Welcome, Admin!</h2>
+    <p>This is your dashboard overview.</p>
+    <!-- Add graphs, charts, etc. here -->
+  </main>
+  <footer>
+    <p>&copy; 2025 Admin Dashboard</p>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute("data-theme");
+      document.documentElement.setAttribute(
+        "data-theme",
+        currentTheme === "dark" ? "light" : "dark"
+      );
+    }
+  </script>
+</body>
+</html>
