@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banking Management System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-university"></i>
+                <h1>SecureBank</h1>
+            </div>
+            <nav class="nav">
+                <button class="nav-btn active" data-tab="dashboard">Dashboard</button>
+                <button class="nav-btn" data-tab="accounts">Accounts</button>
+                <button class="nav-btn" data-tab="transactions">Transactions</button>
+                <button class="nav-btn" data-tab="transfer">Transfer</button>
+            </nav>
+        </header>
+
+        <!-- Dashboard Tab -->
+        <div id="dashboard" class="tab-content active">
+            <div class="dashboard-header">
+                <h2>Welcome back, <span id="user-name">John Doe</span></h2>
+                <div class="date-time" id="current-date-time"></div>
+            </div>
+
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-wallet"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Total Balance</h3>
+                        <p class="stat-value" id="total-balance">$0.00</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Active Accounts</h3>
+                        <p class="stat-value" id="active-accounts">0</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Transactions</h3>
+                        <p class="stat-value" id="total-transactions">0</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>This Month</h3>
+                        <p class="stat-value" id="monthly-activity">$0.00</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recent-activity">
+                <h3>Recent Transactions</h3>
+                <div id="recent-transactions" class="transactions-list">
+                    <p class="no-data">No recent transactions</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Accounts Tab -->
+        <div id="accounts" class="tab-content">
+            <div class="section-header">
+                <h2>Account Management</h2>
+                <button class="btn-primary" id="add-account-btn">
+                    <i class="fas fa-plus"></i> Add Account
+                </button>
+            </div>
+
+            <div id="accounts-list" class="accounts-grid">
+                <p class="no-data">No accounts created yet</p>
+            </div>
+
+            <!-- Add Account Modal -->
+            <div id="add-account-modal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Create New Account</h3>
+                        <span class="close">&times;</span>
+                    </div>
+                    <form id="add-account-form">
+                        <div class="form-group">
+                            <label for="account-name">Account Name</label>
+                            <input type="text" id="account-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="account-type">Account Type</label>
+                            <select id="account-type" required>
+                                <option value="">Select Account Type</option>
+                                <option value="savings">Savings Account</option>
+                                <option value="checking">Checking Account</option>
+                                <option value="business">Business Account</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="initial-deposit">Initial Deposit</label>
+                            <input type="number" id="initial-deposit" min="0" step="0.01" required>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn-secondary" id="cancel-account">Cancel</button>
+                            <button type="submit" class="btn-primary">Create Account</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Transactions Tab -->
+        <div id="transactions" class="tab-content">
+            <div class="section-header">
+                <h2>Transaction History</h2>
+                <div class="transaction-filters">
+                    <select id="filter-account">
+                        <option value="">All Accounts</option>
+                    </select>
+                    <select id="filter-type">
+                        <option value="">All Types</option>
+                        <option value="deposit">Deposit</option>
+                        <option value="withdrawal">Withdrawal</option>
+                        <option value="transfer">Transfer</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="transactions-list" class="transactions-table">
+                <div class="table-header">
+                    <div class="table-cell">Date</div>
+                    <div class="table-cell">Account</div>
+                    <div class="table-cell">Type</div>
+                    <div class="table-cell">Description</div>
+                    <div class="table-cell">Amount</div>
+                    <div class="table-cell">Balance</div>
+                </div>
+                <div id="transactions-body">
+                    <p class="no-data">No transactions found</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Transfer Tab -->
+        <div id="transfer" class="tab-content">
+            <div class="section-header">
+                <h2>Transfer & Deposit</h2>
+            </div>
+
+            <div class="transfer-section">
+                <div class="transfer-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-plus-circle"></i> Deposit Money</h3>
+                    </div>
+                    <form id="deposit-form">
+                        <div class="form-group">
+                            <label for="deposit-account">Select Account</label>
+                            <select id="deposit-account" required>
+                                <option value="">Choose Account</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="deposit-amount">Amount</label>
+                            <input type="number" id="deposit-amount" min="0.01" step="0.01" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="deposit-description">Description</label>
+                            <input type="text" id="deposit-description" placeholder="Enter description">
+                        </div>
+                        <button type="submit" class="btn-success">
+                            <i class="fas fa-plus"></i> Deposit
+                        </button>
+                    </form>
+                </div>
+
+                <div class="transfer-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-minus-circle"></i> Withdraw Money</h3>
+                    </div>
+                    <form id="withdraw-form">
+                        <div class="form-group">
+                            <label for="withdraw-account">Select Account</label>
+                            <select id="withdraw-account" required>
+                                <option value="">Choose Account</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="withdraw-amount">Amount</label>
+                            <input type="number" id="withdraw-amount" min="0.01" step="0.01" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="withdraw-description">Description</label>
+                            <input type="text" id="withdraw-description" placeholder="Enter description">
+                        </div>
+                        <button type="submit" class="btn-danger">
+                            <i class="fas fa-minus"></i> Withdraw
+                        </button>
+                    </form>
+                </div>
+
+                <div class="transfer-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-exchange-alt"></i> Transfer Money</h3>
+                    </div>
+                    <form id="transfer-form">
+                        <div class="form-group">
+                            <label for="transfer-from">From Account</label>
+                            <select id="transfer-from" required>
+                                <option value="">Choose Account</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="transfer-to">To Account</label>
+                            <select id="transfer-to" required>
+                                <option value="">Choose Account</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="transfer-amount">Amount</label>
+                            <input type="number" id="transfer-amount" min="0.01" step="0.01" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="transfer-description">Description</label>
+                            <input type="text" id="transfer-description" placeholder="Enter description">
+                        </div>
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-exchange-alt"></i> Transfer
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success/Error Messages -->
+    <div id="message-container"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
